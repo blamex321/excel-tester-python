@@ -10,6 +10,19 @@ for leader_name in data['Scrum Leader Name'].unique():
         yes_or_no_rows = [10, 11, 12, 13, 14, 15, 16, 19, 20, 21]
         question_rows = list(range(22, 57))
 
+        def plot_number():
+            for index, row in leader_data.iterrows():
+                team_name = row[7]
+                dev_no = row[17]
+                time_diff = row[18]
+                x_data=["Number of DEVS","Timezone Difference"]
+                y_data=[dev_no,time_diff]
+                colors=["blue","green"]
+                plt.bar(x_data, y_data, color=colors)
+                plt.title(f"Team Name:{team_name}")
+                pdf_pages.savefig()
+                plt.clf()
+
         def plot_question_answers(row_number):
             always, mostly, sometimes, rarely, never = 0, 0, 0, 0, 0
             x_data = ["always", "mostly", "sometimes", "rarely", "never"]
@@ -54,3 +67,4 @@ for leader_name in data['Scrum Leader Name'].unique():
             plot_yes_or_no_questions(i)
         for j in question_rows:
             plot_question_answers(j)
+        plot_number()
